@@ -85,7 +85,7 @@ var x = 9;
 					<div id="list${i.index }" style="display: none;">
 						<div class="col-lg-4 col-md-6">
 							<div class="property-item">
-								<div class="pi-pic set-bg"
+								<div class="pi-pic set-bg=m"
 									style="background: url('${mvAllB.mv_imageurl}'); background-repeat:no-repeat; background-size: cover;
 										height: 500px;"
 									onclick="location.href='movieInfo?mv_num=${mvAllB.mv_num }&mv_name=${mvAllB.mv_name}'">

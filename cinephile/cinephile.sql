@@ -172,7 +172,6 @@ insert into board values ('2','제목subject3','내용content3',1,sysdate,'zzzz'
 insert into board values (#{b_num},#{b_subject},#{b_content},#{b_readcount},sysdate,#{c_id},#{b_good},#{b_type},#{b_category},#{b_del})
 delete board;
 select * from board;
-drop table bogoodck;
 drop table board;
 
 ----------------------------------------
@@ -186,7 +185,8 @@ CONSTRAINT FK_bo FOREIGN KEY(b_num) REFERENCES board(b_num),
 CONSTRAINT FK_bo2 FOREIGN KEY(c_id) REFERENCES customer1(c_id)
 );
 
-
+select * from bogoodck;
+drop table bogoodck;
 ----------------------------------------
 
 

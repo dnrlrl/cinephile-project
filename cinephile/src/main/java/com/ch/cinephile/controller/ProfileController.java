@@ -71,14 +71,11 @@ public class ProfileController {
 		model.addAttribute("mlList", mlList);
 		model.addAttribute("customer", customer);
 		//무한스크롤 하기위한 코드
-		ObjectMapper mapper = new ObjectMapper();
-		String jsonText="";;
-		try {
-			jsonText = mapper.writeValueAsString( mlList );
-		} catch (JsonProcessingException e) {
-			e.printStackTrace();
-		}
-		model.addAttribute( "json", jsonText );
+		/*
+		 * ObjectMapper mapper = new ObjectMapper(); String jsonText="";; try { jsonText
+		 * = mapper.writeValueAsString( mlList ); } catch (JsonProcessingException e) {
+		 * e.printStackTrace(); } model.addAttribute( "json", jsonText );
+		 */
 		return "profile/profileMain";
 	}
 	@RequestMapping("profileOther")

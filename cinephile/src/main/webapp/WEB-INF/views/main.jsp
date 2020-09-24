@@ -24,7 +24,7 @@
 #Hz img {
     float:left;
     display:block;
-    max-width:49%;
+    max-width:80%;
     /* width:250; */
     height:auto;
 }
@@ -98,22 +98,15 @@ $(document).ready(function() {
 
 </head>
 <body>
-    <!-- Page Preloder -->
-    <!-- <div id="preloder">
-        <div class="loader"></div>
-    </div> -->
     <!-- Movie Section Begin -->
     <section class="hero-section">
         <div class="container">
-        		
-        		<img class="box-office"alt="" src="${path}/img/BOX-OFFICE2.png" style="height:100px; width:280px;">
-           
-            <div class="hs-slider owl-carousel">
-            
+        		<img class="box-office"alt="" src="${path}/img/BOX-OFFICE2.png" style="height:100px; width:280px;">           
+            <div class="hs-slider owl-carousel">            
             <c:if test="${not empty imageList}">
 			<c:forEach var="board" items="${imageList}" varStatus="status">
                 <div class="hs-item set-bg" data-setbg="${board}" style="cursor: pointer;" onclick="location.href='movieInfo?mv_num=${codeList[status.index] }&mv_name=${nameList[status.index] }'"> <!-- img/hero/hero-1.jpg -->
-					<img alt="" src="${board}" width="900" height="900" >
+					<img alt="" src="${board}" width="1500" height="900" >
 					<div class="row">
                     	<div class="col-md-12">
                     	</div>
@@ -129,13 +122,13 @@ $(document).ready(function() {
 	</div><br>
     <!-- Hero Section End -->
 <!-- 취향집 시작 -->
-<div class="container">
+<!-- <div class="container">
             <div class="row">
-                <div class="col-lg-12">
+                <div class="col-lg-12">-->
 ${nickname }님의 취향집
 	<div id="Hz">
 <c:if test="${not empty favmList }">
-	<c:forEach var="movielist" items="${favmList }" end="3">
+	<c:forEach var="movielist" items="${favmList }" end="6">
     	<img src="${movielist.mv_imageurl }" width="250" height="300"> 
 	</c:forEach>
 	<div class="fzbt" >
@@ -157,7 +150,7 @@ ${nickname }님의 취향집
 	</div>
     </div>
     </div>
-    </div>
+    <!--</div>-->
     <!-- 모놀로그 Begin -->
     <section class="testimonial-section spad">
         <div class="container">
@@ -187,7 +180,6 @@ ${nickname }님의 취향집
                             </div>
                             <div class="ta-text">
                                 <a href="profileOther?c_id=${mono.c_id }"><h5>${moCusList[status.index].c_nickname }</h5></a>
-                                <span>Designer</span>
                                 <c:if test="${not empty nowid }">
                                 	<c:if test="${'y' eq mogoodList[status.index]}">
                                 		<div class="btn btn-link" onclick="location.href='monologuegood?mo_num=${mono.mo_num}&c_id=${nowid }'"><img alt="" src="${path}/img/hearton.png" width="0.2" height="40">${mono.mo_good }</div>
@@ -199,12 +191,6 @@ ${nickname }님의 취향집
                                 <c:if test="${empty nowid }">
                                 	<div class="btn btn-link"><img alt="" src="${path}/img/heartoff.png" width="1" height="40">${mono.mo_good }</div>
                                 </c:if>
-                                
-                                <div class="ta-rating">
-                                </div>
-                            </div>
-                            <div>
-                            	<a href="">신고</a>
                             </div>
                         </div>
                     </div>
@@ -266,8 +252,8 @@ ${nickname }님의 취향집
                         </div>
                         <p>영화에 대해서 소통하는 공간</p>
                         <br>Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>
-                      
-                        
+                        <br>Icons made by <a href="http://www.freepik.com/" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>
+                        Icons made by <a href="https://www.flaticon.com/authors/surang" title="surang">surang</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>                   
                     </div>
                 </div>
                 <div class="col-lg-2 col-sm-6">

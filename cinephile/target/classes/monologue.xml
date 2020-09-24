@@ -25,7 +25,7 @@
 		insert into monologue values(monologue_seq.nextval,#{c_id},#{mo_content},0,sysdate,'n')
 	</insert>
 	<select id="getForCid" parameterType="string" resultMap="monologueResult">
-		select * from monologue where c_id=#{c_id} and mo_del='n'
+		select * from monologue where c_id=#{c_id} and mo_del='n' order by mo_regdate desc
 	</select>
 	<select id="searchHot" resultMap="monologueResult">
 		select * from (select a.*, rowNum rn from (select * from monologue where mo_regdate> TO_CHAR(SYSDATE - 30,'YYYYMMDD') and mo_del='n' order by mo_good desc, mo_regdate desc) a) where rn between 1 and 50

@@ -42,8 +42,6 @@ public class FavoritezipController {
 		if(page == 0) {
 			url = "redirect:/movieInfo?mv_num="+mv_num+"&mv_name="+encodedParam;
 		}else url = "redirect:/movieList";
-		//ModelAndView mav= new ModelAndView();
-		//mav.setView(new RedirectView("movieInfo?mv_num="+mv_num+"&mv_name="+movie.getMv_name()));
 		if(cfavorite!=null) {
 			cs.delete(mv_num,zipnum);
 			return new ModelAndView(url);
@@ -52,8 +50,6 @@ public class FavoritezipController {
 		else{
 			cs.insert(mv_num,zipnum);
 		}
-		//ModelAndView mav new ModelAndView();
-		//mav.setView(new RedirectView("/movieInfo?movie=movie"));
 		return new ModelAndView(url);
 		//return mav;
 	}

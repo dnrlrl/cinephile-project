@@ -102,7 +102,6 @@ public class SearchController {
 				String smv_num = responseBody.substring(0, idx);
 				responseBody = responseBody.substring(1);
 				int mv_num = Integer.parseInt(smv_num);
-				System.out.println(mv_num);
 				String URL = "https://movie.naver.com/movie/bi/mi/basic.nhn?code=" + mv_num;
 				Document doc = Jsoup.connect(URL).get();
 				Movie nmovie = new Movie();
@@ -183,9 +182,7 @@ public class SearchController {
 					nmovie.setMv_runtime(Integer.parseInt(runtime));
 					String image = mv_imageurl.attr("src");
 					nmovie.setMv_imageurl(image);
-					System.out.println("q");
 					ms.insert(nmovie);
-					System.out.println("xx");
 				}
 			}
 			mvList = (List<Movie>)ms.mvList(movie);

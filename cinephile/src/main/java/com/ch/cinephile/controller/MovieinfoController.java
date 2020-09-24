@@ -282,9 +282,7 @@ public class MovieinfoController {
 		String c_id = (String) session.getAttribute("c_id");
 		if (c_id != null) {
 			int zip_num = fs.selectZipnum(c_id);
-			System.out.println(zip_num);
-			List<Cfavorite> cfa = new ArrayList();
-			
+			List<Cfavorite> cfa = new ArrayList<>();
 			cfa = cfs.ckChoiceAll(zip_num);
 			for (int i = 0; i < mvAll.size(); i++) {
 				mv_num = mvAll.get(i).getMv_num();
@@ -305,7 +303,6 @@ public class MovieinfoController {
 		}
 
 		// 상영 여부확인
-		// Movie nmovie = ms.searchMoviee(movie.getMv_name());
 		for (int i = 0; i < mvAll.size(); i++) {
 			boolean result = false;
 			mv_num = mvAll.get(i).getMv_num();
