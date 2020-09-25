@@ -16,9 +16,13 @@
 ## 개발 환경 & 언어
 
 JAVA / JavaScript / Jsp / html
+
 Spring
+
 Tomcat 9.0
+
 Oracle
+
 bootstrap
 
 ## 구현 화면
