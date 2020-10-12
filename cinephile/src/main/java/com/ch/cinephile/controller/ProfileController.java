@@ -8,6 +8,7 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -47,6 +48,8 @@ public class ProfileController {
 	private BookService bs;
 	@Autowired
 	private FollowingService fws;
+	@Autowired
+	BCryptPasswordEncoder passwordEncoder;
 	@RequestMapping("profileMain")
 	public String profileMain(Model model,HttpSession session) {
 		String c_id=(String) session.getAttribute("c_id");
@@ -143,7 +146,7 @@ public class ProfileController {
 	@ResponseBody public String passChk(String c_password,String c_id) {
 		String msg = ""; 
 		String nowpass = cts.passwordChk(c_id);
-		if (nowpass.equals(c_password))
+		if (passwordEncoder.matches(c_password, nowpass))
 			msg="비밀번호가 맞습니다."; 
 		else
 			msg="비밀번호가 틀립니다."; 
@@ -159,7 +162,8 @@ public class ProfileController {
 			return "profile/update";
 		}
 		String nowpass = cts.passwordChk(customer.getC_id());
-		if (!nowpass.equals(c_password2)) {
+	    //boolean matchPw = passwordEncoder.matches(c_password2, nowpass);
+		if (!passwordEncoder.matches(c_password2, nowpass)) {
 			result=-1;
 			model.addAttribute("result", result);
 			return "profile/update";
@@ -184,6 +188,8 @@ public class ProfileController {
 			fs2.close();
 		}
 		customer.setC_proimg(img);
+		String pwdBycrypt = passwordEncoder.encode(customer.getC_password());
+		customer.setC_password(pwdBycrypt);
 		result=cts.update(customer);
 		model.addAttribute("result", result);
 		return "profile/update";

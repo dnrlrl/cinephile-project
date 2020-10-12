@@ -1,8 +1,10 @@
 package com.ch.cinephile.controller;
 
+import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,6 +24,9 @@ public class CustomerController {
 	private CustomerService cs;
 	@Autowired
 	private FavoritezipService fs;
+	@Inject
+	BCryptPasswordEncoder passwordEncoder;
+	
 	@RequestMapping("loginForm")
 	public String loginForm() {
 		return "joinus/loginForm";
@@ -31,9 +36,13 @@ public class CustomerController {
 	public String login(Customer customer, Model model, HttpSession session) {
 		int result=0;
 		Customer customerChk = cs.select(customer.getC_id());
+		
+		String pw = customerChk.getC_password();
+	    boolean matchPw = passwordEncoder.matches(customer.getC_password(), pw);
+		
 		if (customerChk == null || customerChk.getC_del()!='n') 
 			result = -1;
-		else if (customerChk.getC_password().equals(customer.getC_password())) {
+		else if (matchPw) {
 			result = 1;
 			session.setAttribute("c_id", customer.getC_id());
 		}
@@ -65,16 +74,19 @@ public class CustomerController {
 		  return msg; 
 	  }
 	  @RequestMapping(value="join",method=RequestMethod.POST ) 
-	  public String join(Customer customer, Model model) { 
-			  int result=0;
-			  Customer customer2 =  cs.select(customer.getC_id()); 
-			  if(customer2 == null) { 
-				  result=cs.insert(customer);
-				  int a=fs.insert(customer.getC_id());
-			  } 
-			  model.addAttribute("result",result); 
-			  return "joinus/join"; 
-			  }
+	  public String join(Customer customer, Model model) {
+		  int result = 0;
+		  Customer customer2 = cs.select(customer.getC_id());
+		  if (customer2 == null) {
+			  String pwdBycrypt = passwordEncoder.encode(customer.getC_password());
+			  customer.setC_password(pwdBycrypt);
+			  result = cs.insert(customer);
+			  //userService.insertUser(vo);
+			  int a = fs.insert(customer.getC_id());
+		  }
+		  model.addAttribute("result", result);
+		  return "joinus/join";
+	  }
 	  @RequestMapping("logout")
 	  public ModelAndView logout(HttpSession session) {
 		  session.removeAttribute("c_id");
